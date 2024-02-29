@@ -13,15 +13,14 @@ class MyApp extends StatelessWidget {
     AppRoute route = AppRoute();
     return MaterialApp(
       onGenerateRoute: route.onGenerateRoute,
+      themeMode: ThemeMode.dark,
       initialRoute: "/splash",
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'MySelF',
       theme: ThemeData(
-       
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
-      ), 
+      ),
     );
   }
-}   
- 
+}

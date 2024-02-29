@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:myself/const/color_const.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -20,30 +21,24 @@ class _SplashPageState extends State<SplashPage> {
       },
     );
   }
- 
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.blue, Colors.purple],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      color: ColorConst.darkColor,
+      child: Center(
+        child: Text(
+          "Welcome",
+          style: TextStyle(
+            decoration: TextDecoration.none,
+            fontStyle: FontStyle.italic,
+            color: ColorConst.kWhiteColor,
+            fontSize: 33.0,
           ),
         ),
-        child: const Center(
-          child: Text(
-            "Welcome",
-            style: TextStyle(
-              decoration: TextDecoration.none,
-              fontStyle: FontStyle.italic,
-              color: Color.fromARGB(255, 201, 192, 255),
-              fontSize: 33.0,
-            ),
-          ),
-        ));
+      ),
+    );
   }
 }
