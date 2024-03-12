@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:blur/blur.dart';
 import 'package:myself/const/color_const.dart';
+import 'package:myself/const/text_constt.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,11 +16,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorConst.darkColor,
-      drawer: Container(
-        height: MediaQuery.of(context).size.height,
-        width: 250.0,
-        color: Colors.purpleAccent,
-      ),
+      drawer: drawer(context),
       onDrawerChanged: (v) {
         setState(() {
           isOpen = v;
@@ -41,8 +37,33 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        
       ),
+    );
+  }
+
+  Container drawer(BuildContext context) {
+    List<String> scs = SectionConst.sections;
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      width: 300.0,
+      color: ColorConst.darkColor,
+      padding: EdgeInsets.symmetric(vertical: 30.0),
+      child:
+          ListView.builder(
+        itemCount: scs.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(
+              scs[index],
+              style: TextStyle(
+                color: ColorConst.kWhiteColor,
+                fontSize: 24.0,
+              ),
+            ),
+          );
+        },
+      ),
+    
     );
   }
 }
