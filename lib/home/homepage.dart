@@ -48,11 +48,16 @@ class _HomePageState extends State<HomePage> {
       width: 300.0,
       color: ColorConst.darkColor,
       padding: EdgeInsets.symmetric(vertical: 30.0),
-      child:
-          ListView.builder(
+      child: ListView.builder(
         itemCount: scs.length,
         itemBuilder: (context, index) {
           return ListTile(
+            onTap: () {
+              Navigator.popAndPushNamed(
+                context,
+                '/${scs[index].toString()}',
+              );
+            },
             title: Text(
               scs[index],
               style: TextStyle(
@@ -63,7 +68,6 @@ class _HomePageState extends State<HomePage> {
           );
         },
       ),
-    
     );
   }
 }
