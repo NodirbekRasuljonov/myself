@@ -22,20 +22,46 @@ class ContactSection extends StatelessWidget {
         ),
         backgroundColor: ColorConst.darkColor,
       ),
-      body: IconButton(
-        onPressed: () {
-          Future<void> _launchInBrowser(Uri url) async {
-    if (!await launchUrl(
-      url,
-      mode: LaunchMode.externalApplication,
-    )) {
-      throw Exception('Could not launch $url');
-    }
+      body: Container(
+        height: 500.0,
+        alignment: Alignment.topCenter,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              socials(
+                icons: "assets/icons/github.png",
+                action: () {
+                  debugPrint("Github");
+                },
+              ),
+              socials(
+                icons: "assets/icons/telegram.png",
+                action: () {
+                  debugPrint("Telegram");
+                },
+              ),
+              socials(icons: "assets/icons/instagram.png", action: (){
+                debugPrint("Instagram");
+              },),
+              socials(icons: "assets/icons/twitter.png", action: (){
+                debugPrint("Twitter");
+              },),
+            ],
+          ),
+      ),
+      );
+    
   }
-        },
-        icon: Icon(
-          Icons.telegram,
-          size: 100.0,
+
+  GestureDetector socials(
+      {required String icons, required VoidCallback action}) {
+    return GestureDetector(
+      
+      onTap: action,
+      child: SizedBox(
+        height: 75.0,
+        child: Image.asset(
+          icons,
           color: ColorConst.kWhiteColor,
         ),
       ),
