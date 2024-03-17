@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myself/const/color_const.dart';
+import 'package:myself/const/url_const.dart';
+import 'package:url_launcher/link.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactSection extends StatelessWidget {
   const ContactSection({super.key});
@@ -26,37 +29,34 @@ class ContactSection extends StatelessWidget {
         alignment: Alignment.topCenter,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              socials(
-                icons: "assets/icons/github.png",
-                action: () {
-                  debugPrint("Github");
-                },
-              ),
-              socials(
-                icons: "assets/icons/telegram.png",
-                action: () {
-                  debugPrint("Telegram");
-                },
-              ),
-              socials(icons: "assets/icons/instagram.png", action: (){
-                debugPrint("Instagram");
-              },),
-              socials(icons: "assets/icons/twitter.png", action: (){
-                debugPrint("Twitter");
-              },),
-            ],
-          ),
+          children: [
+            socials(
+              icons: "assets/icons/github.png",
+              url: UrlConst.github,
+            ),
+            socials(
+              icons: "assets/icons/telegram.png",
+              url: UrlConst.telegram,
+            ),
+            socials(
+              icons: "assets/icons/instagram.png",
+              url: UrlConst.instagram,
+            ),
+            socials(
+              icons: "assets/icons/twitter.png",
+              url: UrlConst.twitter,
+            ),
+          ],
+        ),
       ),
-      );
-    
+    );
   }
 
-  GestureDetector socials(
-      {required String icons, required VoidCallback action}) {
+  GestureDetector socials({required String icons, required Uri url}) {
     return GestureDetector(
-      
-      onTap: action,
+      onTap: () {
+        launchUrl(url);
+      },
       child: SizedBox(
         height: 75.0,
         child: Image.asset(
