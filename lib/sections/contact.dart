@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myself/const/color_const.dart';
 import 'package:myself/const/url_const.dart';
-import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactSection extends StatelessWidget {
