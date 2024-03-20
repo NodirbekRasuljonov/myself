@@ -8,13 +8,25 @@ class AboutMePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: ColorConst.darkColor,
+        iconTheme: IconThemeData(
+          color: ColorConst.kWhiteColor,
+        ),
+        title: Text(
+          SectionConst.abouttitle,
+          style: TextStyle(
+            color: ColorConst.kWhiteColor,
+            fontSize: 24.0,
+          ),
+        ),
+      ),
       backgroundColor: ColorConst.darkColor,
       body: Center(
         child: Container(
           height: 500.0,
           padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50.0),
           alignment: Alignment.center,
-          color: Colors.amber,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

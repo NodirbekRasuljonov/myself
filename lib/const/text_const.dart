@@ -8,4 +8,5 @@ class SectionConst {
   ];
   static String about =
       "Hi! My name is Nodirbek Rasuljonov. I am Flutter Developer with commercial experience,so you can see my profiles on social media platforms and my projects";
+  static String abouttitle="About Me";
 }
