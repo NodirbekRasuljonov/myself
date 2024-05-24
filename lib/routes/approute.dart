@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:myself/home/homepage.dart';
 import 'package:myself/sections/aboutme.dart';
 import 'package:myself/sections/contact.dart';
+import 'package:myself/sections/post.dart';
 import 'package:myself/splash/splash.dart';
 
 class AppRoute {
@@ -14,7 +15,7 @@ class AppRoute {
             return const SplashPage();
           },
         );
-      case "/home":
+      case "/Home":
         return MaterialPageRoute(
           builder: (context) {
             return const HomePage();
@@ -31,6 +32,12 @@ class AppRoute {
         return MaterialPageRoute(
           builder: (context) {
             return AboutMePage();
+          },
+        );
+        case "/Posts":
+        return MaterialPageRoute(
+          builder: (context) {
+            return Posts();
           },
         );
     }

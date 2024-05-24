@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:myself/const/color_const.dart';
 import 'package:myself/const/text_const.dart';
@@ -34,10 +35,7 @@ class _HomePageState extends State<HomePage> {
               decoration: TextDecoration.none),
         ),
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-      ),
+    
     );
   }
 
@@ -47,7 +45,7 @@ class _HomePageState extends State<HomePage> {
       height: MediaQuery.of(context).size.height,
       width: 300.0,
       color: ColorConst.darkColor,
-      padding: EdgeInsets.symmetric(vertical: 30.0),
+      padding: const EdgeInsets.symmetric(vertical: 30.0),
       child: ListView.builder(
         itemCount: scs.length,
         itemBuilder: (context, index) {

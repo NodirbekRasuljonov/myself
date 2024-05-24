@@ -41,10 +41,10 @@ class ContactSection extends StatelessWidget {
               icons: "assets/icons/instagram.png",
               url: UrlConst.instagram,
             ),
-            socials(
-              icons: "assets/icons/twitter.png",
-              url: UrlConst.twitter,
-            ),
+            // socials(
+            //   icons: "assets/icons/twitter.png",
+            //   url: UrlConst.twitter,
+            // ),
           ],
         ),
       ),
