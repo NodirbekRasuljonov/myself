@@ -63,7 +63,8 @@ class Posts extends StatelessWidget {
                       color: ColorConst.kWhiteColor,
                       fontSize: 18.0,
                     ),
-                  )
+                  ),
+                  SizedBox(height: 15.0,),
                 ],
               ),
             ), itemCount: 5,
