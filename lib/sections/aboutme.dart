@@ -14,7 +14,7 @@ class AboutMePage extends StatelessWidget {
           color: ColorConst.kWhiteColor,
         ),
         title: Text(
-          SectionConst.abouttitle,
+          TextConsts.abouttitle,
           style: TextStyle(
             color: ColorConst.kWhiteColor,
             fontSize: 24.0,
@@ -37,7 +37,7 @@ class AboutMePage extends StatelessWidget {
                 radius: 85.0,
               ),
               Text(
-                SectionConst.about,
+                TextConsts.about,
                 style: TextStyle(
                   color: ColorConst.kWhiteColor,
                   fontSize: 22.0,

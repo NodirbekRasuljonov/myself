@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Container drawer(BuildContext context) {
-    List<String> scs = SectionConst.sections;
+    List<String> scs = TextConsts.sections;
     return Container(
       height: MediaQuery.of(context).size.height,
       width: 300.0,
