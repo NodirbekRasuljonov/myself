@@ -17,7 +17,7 @@ class _SplashPageState extends State<SplashPage> {
     Timer(
       const Duration(seconds: 5),
       () {
-        Navigator.pushReplacementNamed(context, "/Home");
+        // Navigator.pushReplacementNamed(context, "/Home");
       },
     );
   }
@@ -30,13 +30,14 @@ class _SplashPageState extends State<SplashPage> {
       color: ColorConst.darkColor,
       child: Center(
         child: Text(
-          "Welcome",
+          "Welcome to my Portfolio App",
           style: TextStyle(
             decoration: TextDecoration.none,
             fontStyle: FontStyle.italic,
             color: ColorConst.kWhiteColor,
             fontSize: 33.0,
           ),
+          textAlign: TextAlign.center,
         ),
       ),
     );

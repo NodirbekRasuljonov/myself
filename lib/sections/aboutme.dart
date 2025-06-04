@@ -24,8 +24,8 @@ class AboutMePage extends StatelessWidget {
       backgroundColor: ColorConst.darkColor,
       body: Center(
         child: Container(
-          color: Colors.amber,
-          height: 500.0,
+          // color: Colors.cyan.withOpacity(0.2),
+          // height: 500.0,
           padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50.0),
           alignment: Alignment.center,
           child: /*Column(
@@ -52,9 +52,10 @@ class AboutMePage extends StatelessWidget {
                 TextConsts.skills[index].toString(),
                 style: TextStyle(
                   color: ColorConst.kWhiteColor,
-                  fontSize: 22.0,
+                  fontSize: 24.0,
                   
                 ),
+                textAlign: TextAlign.center,
               );
             },
             gridDelegate:
