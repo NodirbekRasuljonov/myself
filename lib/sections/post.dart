@@ -21,13 +21,13 @@ class Posts extends StatelessWidget {
         ),
         backgroundColor: ColorConst.darkColor,
       ),
-      body: Container(
+      body: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: ListView.separated(
-                        separatorBuilder: (context, index) => SizedBox(height: 15,),
+                        separatorBuilder: (context, index) => const SizedBox(height: 15,),
 
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
 
           itemBuilder:(context,index)=> 
             Container(
@@ -44,7 +44,7 @@ class Posts extends StatelessWidget {
                   opacity: 0.4,
                 ),
               ),
-              padding: EdgeInsets.symmetric(horizontal: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -64,7 +64,7 @@ class Posts extends StatelessWidget {
                       fontSize: 18.0,
                     ),
                   ),
-                  SizedBox(height: 15.0,),
+                  const SizedBox(height: 15.0,),
                 ],
               ),
             ), itemCount: 5,

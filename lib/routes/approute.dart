@@ -31,13 +31,13 @@ class AppRoute {
       case "/About Me":
         return MaterialPageRoute(
           builder: (context) {
-            return AboutMePage();
+            return const AboutMePage();
           },
         );
         case "/Posts":
         return MaterialPageRoute(
           builder: (context) {
-            return Posts();
+            return const Posts();
           },
         );
     }

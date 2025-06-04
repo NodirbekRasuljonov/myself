@@ -25,37 +25,37 @@ class ContactSection extends StatelessWidget {
         backgroundColor: ColorConst.darkColor,
       ),
       body: Container(
-        height: MediaQuery.of(context).size.height,
-        alignment: Alignment.topCenter,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            socials(
-              icons: "assets/icons/github.png",
-              url: UrlConst.github,
-            ),
-            socials(
-              icons: "assets/icons/telegram.png",
-              url: UrlConst.telegram,
-            ),
-            socials(
-              icons: "assets/icons/instagram.png",
-              url: UrlConst.instagram,
-            ),
-            // socials(
-            //   icons: "assets/icons/twitter.png",
-            // ),
-            inputs(),
-            send()
-          ],
+          height: MediaQuery.of(context).size.height,
+          alignment: Alignment.topCenter,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              socials(
+                icons: "assets/icons/github.png",
+                url: UrlConst.github,
+              ),
+              socials(
+                icons: "assets/icons/telegram.png",
+                url: UrlConst.telegram,
+              ),
+              socials(
+                icons: "assets/icons/instagram.png",
+                url: UrlConst.instagram,
+              ),
+              // socials(
+              //   icons: "assets/icons/twitter.png",
+              // ),
+              inputs(),
+              send()
+            ],
+          ),
         ),
-      ),
-    );
+      );
   }
 
   Container inputs() {
     return Container(
-      height: 250.0,
+      height: 100.0,
       width: 350.0,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
@@ -82,7 +82,7 @@ class ContactSection extends StatelessWidget {
   ElevatedButton send() => ElevatedButton(
         onPressed: () {},
         style: ElevatedButton.styleFrom(
-            fixedSize: Size(350, 50),
+            fixedSize: const Size(350, 50),
             backgroundColor: ColorConst.darkColor,
             disabledBackgroundColor: ColorConst.darkColor,
             surfaceTintColor: ColorConst.darkColor,

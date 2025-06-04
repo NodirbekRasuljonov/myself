@@ -24,10 +24,11 @@ class AboutMePage extends StatelessWidget {
       backgroundColor: ColorConst.darkColor,
       body: Center(
         child: Container(
+          color: Colors.amber,
           height: 500.0,
           padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50.0),
           alignment: Alignment.center,
-          child: Column(
+          child: /*Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const CircleAvatar(
@@ -43,9 +44,24 @@ class AboutMePage extends StatelessWidget {
                   fontSize: 22.0,
                 ),
                 textAlign: TextAlign.center,
-              ),
-            ],
+              ),*/
+              GridView.builder(
+            itemCount: TextConsts.skills.length,
+            itemBuilder: (context, index) {
+              return Text(
+                TextConsts.skills[index].toString(),
+                style: TextStyle(
+                  color: ColorConst.kWhiteColor,
+                  fontSize: 22.0,
+                  
+                ),
+              );
+            },
+            gridDelegate:
+                const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
           ),
+
+          //])
         ),
       ),
     );
