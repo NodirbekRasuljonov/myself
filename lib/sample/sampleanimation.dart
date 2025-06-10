@@ -12,12 +12,14 @@ class SampleanimationPage extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       alignment: Alignment.center,
       color: ColorConst.darkColor,
-      child: AnimatedTextKit(
-        totalRepeatCount: 2,
+      child: 
+
+      AnimatedTextKit(
+        totalRepeatCount: 1,
         onTap: () {
           debugPrint("Helloooooo");
         },
-        pause: Duration(milliseconds: 1500),
+        pause: const Duration(milliseconds: 1500),
         animatedTexts: [
           TyperAnimatedText(
             "Hello World",
@@ -26,7 +28,7 @@ class SampleanimationPage extends StatelessWidget {
               color: ColorConst.kWhiteColor,
               decoration: TextDecoration.none,
             ),
-            speed: Duration(
+            speed: const Duration(
               milliseconds: 100,
             ),
           ),
@@ -37,10 +39,30 @@ class SampleanimationPage extends StatelessWidget {
               color: ColorConst.kWhiteColor,
               decoration: TextDecoration.none,
             ),
-            speed: Duration(
+            speed: const Duration(
               milliseconds: 100,
             ),
           ),
+          FadeAnimatedText(
+            "My Name is Nodirbek",
+            textStyle: TextStyle(
+              color: ColorConst.kWhiteColor,
+              fontSize: 24.0,
+              decoration: TextDecoration.none,
+            ),
+          ),
+          ScaleAnimatedText(
+            "I am a student at Vistula University",
+            textStyle: TextStyle(
+              color: ColorConst.kWhiteColor,
+              fontSize: 24.0,
+              decoration: TextDecoration.none,
+            ),
+            textAlign: TextAlign.center,
+            duration: Duration(milliseconds: 3000),
+            scalingFactor: 0.2,
+          ),
+          
         ],
       ),
     );
