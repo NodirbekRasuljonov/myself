@@ -12,9 +12,7 @@ class SampleanimationPage extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       alignment: Alignment.center,
       color: ColorConst.darkColor,
-      child: 
-
-      AnimatedTextKit(
+      child: AnimatedTextKit(
         totalRepeatCount: 1,
         onTap: () {
           debugPrint("Helloooooo");
@@ -62,7 +60,6 @@ class SampleanimationPage extends StatelessWidget {
             duration: Duration(milliseconds: 3000),
             scalingFactor: 0.2,
           ),
-          
         ],
       ),
     );
