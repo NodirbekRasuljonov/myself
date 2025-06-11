@@ -30,36 +30,36 @@ class SampleanimationPage extends StatelessWidget {
               milliseconds: 100,
             ),
           ),
-          TypewriterAnimatedText(
-            "Welcome",
-            textStyle: TextStyle(
-              fontSize: 24.0,
-              color: ColorConst.kWhiteColor,
-              decoration: TextDecoration.none,
-            ),
-            speed: const Duration(
-              milliseconds: 100,
-            ),
-          ),
-          FadeAnimatedText(
-            "My Name is Nodirbek",
-            textStyle: TextStyle(
-              color: ColorConst.kWhiteColor,
-              fontSize: 24.0,
-              decoration: TextDecoration.none,
-            ),
-          ),
-          ScaleAnimatedText(
-            "I am a student at Vistula University",
-            textStyle: TextStyle(
-              color: ColorConst.kWhiteColor,
-              fontSize: 24.0,
-              decoration: TextDecoration.none,
-            ),
-            textAlign: TextAlign.center,
-            duration: Duration(milliseconds: 3000),
-            scalingFactor: 0.2,
-          ),
+          // TypewriterAnimatedText(
+          //   "Welcome",
+          //   textStyle: TextStyle(
+          //     fontSize: 24.0,
+          //     color: ColorConst.kWhiteColor,
+          //     decoration: TextDecoration.none,
+          //   ),
+          //   speed: const Duration(
+          //     milliseconds: 100,
+          //   ),
+          // ),
+          // FadeAnimatedText(
+          //   "My Name is Nodirbek",
+          //   textStyle: TextStyle(
+          //     color: ColorConst.kWhiteColor,
+          //     fontSize: 24.0,
+          //     decoration: TextDecoration.none,
+          //   ),
+          // ),
+          // ScaleAnimatedText(
+          //   "I am a student at Vistula University",
+          //   textStyle: TextStyle(
+          //     color: ColorConst.kWhiteColor,
+          //     fontSize: 24.0,
+          //     decoration: TextDecoration.none,
+          //   ),
+          //   textAlign: TextAlign.center,
+          //   duration: Duration(milliseconds: 3000),
+          //   scalingFactor: 0.2,
+          // ),
         ],
       ),
     );
