@@ -4,8 +4,10 @@ import 'package:myself/const/text_const.dart';
 import 'package:myself/const/url_const.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+// ignore: must_be_immutable
 class ContactSection extends StatelessWidget {
-  const ContactSection({super.key});
+  ContactSection({super.key});
+  TextEditingController msgController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,56 +27,65 @@ class ContactSection extends StatelessWidget {
         backgroundColor: ColorConst.darkColor,
       ),
       body: Container(
-          height: MediaQuery.of(context).size.height,
-          alignment: Alignment.topCenter,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              socials(
-                icons: "assets/icons/github.png",
-                url: UrlConst.github,
-              ),
-              socials(
-                icons: "assets/icons/telegram.png",
-                url: UrlConst.telegram,
-              ),
-              socials(
-                icons: "assets/icons/instagram.png",
-                url: UrlConst.instagram,
-              ),
-              // socials(
-              //   icons: "assets/icons/twitter.png",
-              // ),
-              inputs(),
-              send()
-            ],
-          ),
+        height: MediaQuery.of(context).size.height,
+        alignment: Alignment.topCenter,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            socials(
+              icons: "assets/icons/github.png",
+              url: UrlConst.github,
+            ),
+            socials(
+              icons: "assets/icons/telegram.png",
+              url: UrlConst.telegram,
+            ),
+            socials(
+              icons: "assets/icons/instagram.png",
+              url: UrlConst.instagram,
+            ),
+            // socials(
+            //   icons: "assets/icons/twitter.png",
+            // ),
+            inputs(context),
+            send(),
+          ],
         ),
-      );
+      ),
+    );
   }
 
-  Container inputs() {
+  Container inputs(context) {
     return Container(
       height: 100.0,
       width: 350.0,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(
-          4.0,
-        ),
-        border: Border.all(
-          color: ColorConst.kWhiteColor,
-        ),
+      alignment: Alignment.center,
+      // color: Colors.amber,
 
-        // color: ColorConst.darkColor.withOpacity(0.5),
-        color: Colors.transparent,
-      ),
-      child: Column(
-        children: [
-          TextFormField(
-
-            
+      child: SizedBox.expand(
+        child: TextFormField(
+          maxLines: 4,
+          cursorColor: ColorConst.kWhiteColor,
+          style: TextStyle(color: ColorConst.kWhiteColor, fontSize: 18.0),
+          controller: msgController,
+          decoration: InputDecoration(
+            focusColor: ColorConst.kWhiteColor,
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: BorderSide(
+                color: ColorConst.kWhiteColor,
+              ),
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: BorderSide(
+                color: ColorConst.kWhiteColor,
+              ),
+            ),
+            contentPadding:
+                EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
           ),
-        ],
+        ),
       ),
     );
   }
@@ -82,12 +93,13 @@ class ContactSection extends StatelessWidget {
   ElevatedButton send() => ElevatedButton(
         onPressed: () {},
         style: ElevatedButton.styleFrom(
-            fixedSize: const Size(350, 50),
-            backgroundColor: ColorConst.darkColor,
-            disabledBackgroundColor: ColorConst.darkColor,
-            surfaceTintColor: ColorConst.darkColor,
-            foregroundColor: ColorConst.kWhiteColor,
-            side: BorderSide(color: ColorConst.kWhiteColor)),
+          fixedSize: const Size(350, 50),
+          backgroundColor: ColorConst.darkColor,
+          disabledBackgroundColor: ColorConst.darkColor,
+          surfaceTintColor: ColorConst.darkColor,
+          foregroundColor: ColorConst.kWhiteColor,
+          side: BorderSide(color: ColorConst.kWhiteColor),
+        ),
         child: Text(
           TextConsts.send,
           style: TextStyle(

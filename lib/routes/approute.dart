@@ -4,6 +4,7 @@ import 'package:myself/sample/sampleanimation.dart';
 import 'package:myself/sections/aboutme.dart';
 import 'package:myself/sections/contact.dart';
 import 'package:myself/sections/post.dart';
+import 'package:myself/sections/projects.dart';
 import 'package:myself/splash/splash.dart';
 
 class AppRoute {
@@ -31,7 +32,7 @@ class AppRoute {
       case "/Contact":
         return MaterialPageRoute(
           builder: (context) {
-            return const ContactSection();
+            return  ContactSection();
           },
         );
       case "/About Me":
@@ -44,6 +45,12 @@ class AppRoute {
         return MaterialPageRoute(
           builder: (context) {
             return const Posts();
+          },
+        );
+      case "/Projects":
+        return MaterialPageRoute(
+          builder: (context) {
+            return Projects();
           },
         );
     }
