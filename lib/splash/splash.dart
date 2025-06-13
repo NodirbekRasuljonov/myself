@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:myself/const/color_const.dart';
 
@@ -17,7 +18,7 @@ class _SplashPageState extends State<SplashPage> {
     Timer(
       const Duration(seconds: 5),
       () {
-        // Navigator.pushReplacementNamed(context, "/Home");
+        Navigator.pushReplacementNamed(context, "/Home");
       },
     );
   }
@@ -28,17 +29,23 @@ class _SplashPageState extends State<SplashPage> {
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       color: ColorConst.darkColor,
-      child: Center(
-        child: Text(
-          "Welcome to my Portfolio App",
-          style: TextStyle(
-            decoration: TextDecoration.none,
-            fontStyle: FontStyle.italic,
-            color: ColorConst.kWhiteColor,
-            fontSize: 33.0,
+      alignment: Alignment.center,
+      child: AnimatedTextKit(
+        totalRepeatCount: 1,
+        animatedTexts: [
+          TypewriterAnimatedText(
+            "Welcome to my Portfolio App",
+            textAlign: TextAlign.center,
+            textStyle: TextStyle(
+              fontSize: 30.0,
+              fontStyle: FontStyle.italic,
+              color: ColorConst.kWhiteColor,
+              decoration: TextDecoration.none,
+            ),
+            // ignore: prefer_const_constructors
+            speed: Duration(milliseconds: 60),
           ),
-          textAlign: TextAlign.center,
-        ),
+        ],
       ),
     );
   }

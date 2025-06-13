@@ -11,10 +11,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   double blurvalue = 0.0;
+  GlobalKey _globalKey = GlobalKey<ScaffoldState>();
   bool isOpen = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _globalKey,
       backgroundColor: ColorConst.darkColor,
       drawer: drawer(context),
       onDrawerChanged: (v) {
@@ -29,12 +31,12 @@ class _HomePageState extends State<HomePage> {
         title: Text(
           "Home Page",
           style: TextStyle(
-              color: ColorConst.kWhiteColor,
-              fontSize: 24.0,
-              decoration: TextDecoration.none),
+            color: ColorConst.kWhiteColor,
+            fontSize: 24.0,
+            decoration: TextDecoration.none,
+          ),
         ),
       ),
-    
     );
   }
 
@@ -50,6 +52,7 @@ class _HomePageState extends State<HomePage> {
         itemBuilder: (context, index) {
           return ListTile(
             onTap: () {
+              // Navigator.pop(context);
               Navigator.popAndPushNamed(
                 context,
                 '/${scs[index].toString()}',
