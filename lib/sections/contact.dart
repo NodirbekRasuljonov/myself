@@ -28,7 +28,7 @@ class ContactSection extends StatelessWidget {
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
-        alignment: Alignment.topCenter,
+        alignment: Alignment.center,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -57,19 +57,25 @@ class ContactSection extends StatelessWidget {
 
   Container inputs(context) {
     return Container(
-      height: 100.0,
+      height: 150.0,
       width: 350.0,
       alignment: Alignment.center,
       // color: Colors.amber,
 
       child: SizedBox.expand(
         child: TextFormField(
-          maxLines: 4,
+          maxLines: 100,
           cursorColor: ColorConst.kWhiteColor,
           style: TextStyle(color: ColorConst.kWhiteColor, fontSize: 18.0),
           controller: msgController,
           decoration: InputDecoration(
             focusColor: ColorConst.kWhiteColor,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: BorderSide(
+                color: ColorConst.kWhiteColor,
+              ),
+            ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
               borderSide: BorderSide(
@@ -82,8 +88,8 @@ class ContactSection extends StatelessWidget {
                 color: ColorConst.kWhiteColor,
               ),
             ),
-            contentPadding:
-                EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            // contentPadding:
+            //     EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
           ),
         ),
       ),
