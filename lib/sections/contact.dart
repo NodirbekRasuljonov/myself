@@ -122,24 +122,12 @@ class ContactSection extends StatelessWidget {
           showDialog<void>(
             context: context,
             builder: (BuildContext context) {
-              return AlertDialog.adaptive(
-                
-                content: Column(
-                  children: [
-                    Lottie.asset(
-                      'assets/animations/checked.json',
-                      
-                  
-                      
-                    ),
-                    Text(
-                      "salom hammaga",
-                    ),
-                    Text(
-                      "yaxshimisizlar,",
-                    ),
-                  ],
+              return Dialog(
+                child: Lottie.asset(
+                  'assets/animations/checked.json',
+                  repeat: false,
                 ),
+              
               );
             },
           );
