@@ -3,6 +3,8 @@ import 'package:myself/const/color_const.dart';
 import 'package:myself/const/text_const.dart';
 import 'package:myself/const/url_const.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:lottie/lottie.dart';
+
 
 // ignore: must_be_immutable
 class ContactSection extends StatelessWidget {
@@ -97,7 +99,10 @@ class ContactSection extends StatelessWidget {
   }
 
   ElevatedButton send() => ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Lottie.asset('assets/animations/checked.json');
+
+        },
         style: ElevatedButton.styleFrom(
           fixedSize: const Size(350, 50),
           backgroundColor: ColorConst.darkColor,
