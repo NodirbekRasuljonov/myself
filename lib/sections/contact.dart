@@ -5,7 +5,6 @@ import 'package:myself/const/url_const.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:lottie/lottie.dart';
 
-
 // ignore: must_be_immutable
 class ContactSection extends StatelessWidget {
   ContactSection({super.key});
@@ -50,7 +49,11 @@ class ContactSection extends StatelessWidget {
             //   icons: "assets/icons/twitter.png",
             // ),
             inputs(context),
-            send(),
+            send(context),
+            // Lottie.asset(
+            //   'assets/animations/checked.json',
+            //   height: 50.0,
+            // ),
           ],
         ),
       ),
@@ -98,11 +101,7 @@ class ContactSection extends StatelessWidget {
     );
   }
 
-  ElevatedButton send() => ElevatedButton(
-        onPressed: () {
-          Lottie.asset('assets/animations/checked.json');
-
-        },
+  ElevatedButton send(context) => ElevatedButton(
         style: ElevatedButton.styleFrom(
           fixedSize: const Size(350, 50),
           backgroundColor: ColorConst.darkColor,
@@ -118,6 +117,33 @@ class ContactSection extends StatelessWidget {
             color: ColorConst.kWhiteColor,
           ),
         ),
+        onPressed: () async {
+          debugPrint("salom hammaga men buttonman");
+          showDialog<void>(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog.adaptive(
+                
+                content: Column(
+                  children: [
+                    Lottie.asset(
+                      'assets/animations/checked.json',
+                      
+                  
+                      
+                    ),
+                    Text(
+                      "salom hammaga",
+                    ),
+                    Text(
+                      "yaxshimisizlar,",
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+        },
       );
 
   GestureDetector socials({required String icons, required Uri url}) {
