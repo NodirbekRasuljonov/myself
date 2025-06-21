@@ -123,25 +123,29 @@ class ContactSection extends StatelessWidget {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                  insetPadding: EdgeInsets.symmetric(vertical: 50.0,horizontal: 50.0),
-                  backgroundColor: Colors.amber,
-                  content: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Lottie.asset(
-                        'assets/animations/checked.json',
-                        repeat: false,
+                backgroundColor: Colors.transparent,
+                content: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Lottie.asset(
+                      'assets/animations/checked.json',
+                      repeat: false,
+                    ),
+                    Text(
+                      "Your massage has been sent succesfully !!!",
+                      style: TextStyle(
+                        color: ColorConst.kWhiteColor,
+                        fontSize: 24.0,
                       ),
-                      Text(
-                        "Your massage has been sent succesfully !!!",
-                        style: TextStyle(
-                          color: ColorConst.kWhiteColor,
-                          fontSize: 24.0,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ));
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+                insetPadding: const EdgeInsets.symmetric(
+                  vertical: 150.0,
+                  horizontal: 50.0,
+                ),
+              );
             },
           );
         },
