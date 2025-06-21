@@ -122,13 +122,28 @@ class ContactSection extends StatelessWidget {
           showDialog<void>(
             context: context,
             builder: (BuildContext context) {
-              return Dialog(
-                child: Lottie.asset(
-                  'assets/animations/checked.json',
-                  repeat: false,
-                ),
-              
-              );
+              return AlertDialog(
+                  icon: Icon(
+                    Icons.home_filled,
+                  ),
+                  backgroundColor: Colors.transparent,
+                  content: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Lottie.asset(
+                        'assets/animations/checked.json',
+                        repeat: false,
+                      ),
+                      Text(
+                        "Your massage has been sent succesfully !!!",
+                        style: TextStyle(
+                          color: ColorConst.kWhiteColor,
+                          fontSize: 24.0,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ));
             },
           );
         },
