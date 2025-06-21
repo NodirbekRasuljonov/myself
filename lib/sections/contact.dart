@@ -123,10 +123,8 @@ class ContactSection extends StatelessWidget {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                  icon: Icon(
-                    Icons.home_filled,
-                  ),
-                  backgroundColor: Colors.transparent,
+                  insetPadding: EdgeInsets.symmetric(vertical: 50.0,horizontal: 50.0),
+                  backgroundColor: Colors.amber,
                   content: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
