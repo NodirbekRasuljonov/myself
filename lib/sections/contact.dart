@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:myself/const/color_const.dart';
 import 'package:myself/const/text_const.dart';
@@ -6,9 +8,37 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:lottie/lottie.dart';
 
 // ignore: must_be_immutable
-class ContactSection extends StatelessWidget {
+class ContactSection extends StatefulWidget {
   ContactSection({super.key});
+
+  @override
+  State<ContactSection> createState() => _ContactSectionState();
+}
+
+class _ContactSectionState extends State<ContactSection>
+    with SingleTickerProviderStateMixin {
   TextEditingController msgController = TextEditingController();
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _controller = AnimationController(vsync: this);
+    _controller.addStatusListener(
+      (status) {
+        if (status == AnimationStatus.completed) {
+          _controller.stop();
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -122,28 +152,37 @@ class ContactSection extends StatelessWidget {
           showDialog<void>(
             context: context,
             builder: (BuildContext context) {
-              return AlertDialog(
-                backgroundColor: Colors.transparent,
-                content: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Lottie.asset(
-                      'assets/animations/checked.json',
-                      repeat: false,
-                    ),
-                    Text(
-                      "Your massage has been sent succesfully !!!",
-                      style: TextStyle(
-                        color: ColorConst.kWhiteColor,
-                        fontSize: 24.0,
+              return BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 100.0, sigmaY: 300.0),
+                child: AlertDialog(
+                  backgroundColor: Colors.transparent,
+                  content: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Lottie.asset(
+                        'assets/animations/checked.json',
+                        controller: _controller,
+                        onLoaded: (composition) {
+                          _controller
+                            ..duration = composition.duration
+                            ..forward(); // Starts animation
+                        },
+                        // repeat: false,
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-                insetPadding: const EdgeInsets.symmetric(
-                  vertical: 150.0,
-                  horizontal: 50.0,
+                      Text(
+                        "Your massage has been sent succesfully !!!",
+                        style: TextStyle(
+                          color: ColorConst.kWhiteColor,
+                          fontSize: 24.0,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                  insetPadding: const EdgeInsets.symmetric(
+                    vertical: 150.0,
+                    horizontal: 50.0,
+                  ),
                 ),
               );
             },
