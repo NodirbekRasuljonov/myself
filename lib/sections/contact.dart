@@ -25,9 +25,9 @@ class _ContactSectionState extends State<ContactSection>
     // TODO: implement initState
     super.initState();
     _controller = AnimationController(vsync: this);
-    _controller.addStatusListener(
-      (status) {
-        if (status == AnimationStatus.completed) {
+    _controller.addListener(
+      (){
+        if (_controller.value >=0.5) {
           _controller.stop();
         }
       },
@@ -155,7 +155,7 @@ class _ContactSectionState extends State<ContactSection>
                   content: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Lottie.asset(
+                      LottieBuilder.asset(
                         'assets/animations/checked.json',
                         controller: _controller,
                         onLoaded: (composition) {
