@@ -34,11 +34,7 @@ class _ContactSectionState extends State<ContactSection>
     );
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -203,5 +199,10 @@ class _ContactSectionState extends State<ContactSection>
         ),
       ),
     );
+  }
+   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }
