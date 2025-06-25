@@ -164,7 +164,7 @@ class _ContactSectionState extends State<ContactSection>
                         },
                         width: 300.0,
                         height: 300.0,
-                        repeat: false,
+                        // repeat: false,
                       ),
                       Text(
                         "Your massage has been sent succesfully !!!",
