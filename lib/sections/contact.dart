@@ -26,15 +26,13 @@ class _ContactSectionState extends State<ContactSection>
     super.initState();
     _controller = AnimationController(vsync: this);
     _controller.addListener(
-      (){
-        if (_controller.value >=0.5) {
+      () {
+        if (_controller.value >= 0.5) {
           _controller.stop();
         }
       },
     );
   }
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +147,7 @@ class _ContactSectionState extends State<ContactSection>
             context: context,
             builder: (BuildContext context) {
               return BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 100.0, sigmaY: 300.0),
+                filter: ImageFilter.blur(sigmaX: 100.0, sigmaY: 100.0),
                 child: AlertDialog(
                   backgroundColor: Colors.transparent,
                   content: Column(
@@ -163,6 +161,8 @@ class _ContactSectionState extends State<ContactSection>
                             ..duration = composition.duration
                             ..forward(); // Starts animation
                         },
+                        width: 300.0,
+                        height: 300.0,
                         // repeat: false,
                       ),
                       Text(
@@ -176,7 +176,7 @@ class _ContactSectionState extends State<ContactSection>
                     ],
                   ),
                   insetPadding: const EdgeInsets.symmetric(
-                    vertical: 150.0,
+                    vertical: 50.0,
                     horizontal: 50.0,
                   ),
                 ),
@@ -200,7 +200,8 @@ class _ContactSectionState extends State<ContactSection>
       ),
     );
   }
-   @override
+
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
