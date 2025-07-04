@@ -18,6 +18,7 @@ class ContactSection extends StatefulWidget {
 class _ContactSectionState extends State<ContactSection>
     with SingleTickerProviderStateMixin {
   TextEditingController msgController = TextEditingController();
+  final GlobalKey<FormState> _formKey=GlobalKey<FormState>();
   late final AnimationController _controller;
 
   @override
@@ -29,7 +30,7 @@ class _ContactSectionState extends State<ContactSection>
       () {
         if (_controller.value >= 0.5) {
           _controller.stop();
-          Future.delayed(Duration(seconds: 2)).then((_) {
+          Future.delayed(const Duration(seconds: 1)).then((_) {
             Navigator.pop(context);
           });
         }
@@ -94,34 +95,41 @@ class _ContactSectionState extends State<ContactSection>
       alignment: Alignment.center,
       // color: Colors.amber,
 
-      child: SizedBox.expand(
-        child: TextFormField(
-          maxLines: 100,
-          cursorColor: ColorConst.kWhiteColor,
-          style: TextStyle(color: ColorConst.kWhiteColor, fontSize: 18.0),
-          controller: msgController,
-          decoration: InputDecoration(
-            focusColor: ColorConst.kWhiteColor,
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              borderSide: BorderSide(
-                color: ColorConst.kWhiteColor,
+      child: Form(
+        key: _formKey,
+        child: SizedBox.expand(
+          child: TextFormField(
+            validator: (value) => value!.isEmpty?"Please it cannot be empty!!!":null,
+            maxLines: 100,
+            cursorColor: ColorConst.kWhiteColor,
+            style: TextStyle(color: ColorConst.kWhiteColor, fontSize: 18.0),
+            controller: msgController,
+            decoration: InputDecoration(
+              focusColor: ColorConst.kWhiteColor,
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: BorderSide(
+                  color: ColorConst.kWhiteColor,
+                ),
               ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              borderSide: BorderSide(
-                color: ColorConst.kWhiteColor,
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: BorderSide(
+                  color: ColorConst.kWhiteColor,
+                ),
               ),
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              borderSide: BorderSide(
-                color: ColorConst.kWhiteColor,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: BorderSide(
+                  color: ColorConst.kWhiteColor,
+                ),
               ),
+            errorStyle: const TextStyle(
+              color: Colors.redAccent,
+              fontSize: 18,
+              
+            )
             ),
-            // contentPadding:
-            //     EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
           ),
         ),
       ),
@@ -129,75 +137,24 @@ class _ContactSectionState extends State<ContactSection>
   }
 
   ElevatedButton send(context) => ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          fixedSize: const Size(350, 50),
-          backgroundColor: ColorConst.darkColor,
-          disabledBackgroundColor: ColorConst.darkColor,
-          surfaceTintColor: ColorConst.darkColor,
-          foregroundColor: ColorConst.kWhiteColor,
-          side: BorderSide(color: ColorConst.kWhiteColor),
+      style: ElevatedButton.styleFrom(
+        fixedSize: const Size(350, 50),
+        backgroundColor: ColorConst.darkColor,
+        disabledBackgroundColor: ColorConst.darkColor,
+        surfaceTintColor: ColorConst.darkColor,
+        foregroundColor: ColorConst.kWhiteColor,
+        side: BorderSide(color: ColorConst.kWhiteColor),
+      ),
+      child: Text(
+        TextConsts.send,
+        style: TextStyle(
+          fontSize: 24.0,
+          color: ColorConst.kWhiteColor,
         ),
-        child: Text(
-          TextConsts.send,
-          style: TextStyle(
-            fontSize: 24.0,
-            color: ColorConst.kWhiteColor,
-          ),
-        ),
-        onPressed: () async {
-          if (msgController.text.isNotEmpty) {
-            _controller.reset();
-            debugPrint("salom hammaga men buttonman");
-            showDialog<void>(
-              context: context,
-              builder: (BuildContext context) {
-                return BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 100.0, sigmaY: 100.0),
-                  child: AlertDialog(
-                    backgroundColor: Colors.transparent,
-                    content: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        LottieBuilder.asset(
-                          'assets/animations/checked.json',
-                          controller: _controller,
-                          onLoaded: (composition) {
-                            _controller
-                              ..duration = composition.duration
-                              ..forward();
-                          },
-                          width: 300.0,
-                          height: 300.0,
-                          // repeat: false,
-                        ),
-                        Text(
-                          "Your massage has been sent succesfully !!!",
-                          style: TextStyle(
-                            color: ColorConst.kWhiteColor,
-                            fontSize: 24.0,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                    insetPadding: const EdgeInsets.symmetric(
-                      vertical: 50.0,
-                      horizontal: 50.0,
-                    ),
-                  ),
-                );
-              },
-            );
-            msgController.clear();
-          } else {
-            PopupMenuItem(
-              
-              child: Text("Please fill the text"),
-
-            );
-          }
-        },
-      );
+      ),
+      onPressed: () async {
+        validateAndSave();
+      });
 
   GestureDetector socials({required String icons, required Uri url}) {
     return GestureDetector(
@@ -214,9 +171,66 @@ class _ContactSectionState extends State<ContactSection>
     );
   }
 
+  void validateAndSave(){
+    final FormState? form=_formKey.currentState;
+    if(
+      form!.validate()
+    ){
+      _controller.reset();
+      debugPrint("salom hammaga men buttonman");
+      showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 100.0, sigmaY: 100.0),
+            child: AlertDialog(
+              backgroundColor: Colors.transparent,
+              content: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  LottieBuilder.asset(
+                    'assets/animations/checked.json',
+                    controller: _controller,
+                    onLoaded: (composition) {
+                      _controller
+                        ..duration = composition.duration
+                        ..forward();
+                    },
+                    width: 300.0,
+                    height: 300.0,
+                    // repeat: false,
+                  ),
+                  Text(
+                    "Your massage has been sent succesfully !!!",
+                    style: TextStyle(
+                      color: ColorConst.kWhiteColor,
+                      fontSize: 24.0,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+              insetPadding: const EdgeInsets.symmetric(
+                vertical: 50.0,
+                horizontal: 50.0,
+              ),
+            ),
+          );
+        },
+      );
+      msgController.clear();
+
+    }
+    else{
+    msgController.clear();
+    }
+  }
+
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
 }
+
+
