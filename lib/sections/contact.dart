@@ -148,6 +148,7 @@ class _ContactSectionState extends State<ContactSection>
             context: context,
             builder: (BuildContext context) {
               return BackdropFilter(
+                
                 filter: ImageFilter.blur(sigmaX: 100.0, sigmaY: 100.0),
                 child: AlertDialog(
                   backgroundColor: Colors.transparent,
@@ -160,7 +161,13 @@ class _ContactSectionState extends State<ContactSection>
                         onLoaded: (composition) {
                           _controller
                             ..duration = composition.duration
-                            ..forward(); // Starts animation
+                            ..forward();
+                            _controller.addStatusListener((status){
+                              if(status==AnimationStatus.completed){
+                                Navigator.pop(context);
+                                // _controller.removeStatusListener((_){});
+                              }
+                            });
                         },
                         width: 300.0,
                         height: 300.0,
@@ -184,6 +191,8 @@ class _ContactSectionState extends State<ContactSection>
               );
             },
           );
+          msgController.clear();
+          
         },
       );
 
