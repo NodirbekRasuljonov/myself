@@ -29,6 +29,9 @@ class _ContactSectionState extends State<ContactSection>
       () {
         if (_controller.value >= 0.5) {
           _controller.stop();
+          Future.delayed(Duration(seconds: 2)).then((_) {
+            Navigator.pop(context);
+          });
         }
       },
     );
@@ -142,57 +145,57 @@ class _ContactSectionState extends State<ContactSection>
           ),
         ),
         onPressed: () async {
-          _controller.reset();
-          debugPrint("salom hammaga men buttonman");
-          showDialog<void>(
-            context: context,
-            builder: (BuildContext context) {
-              return BackdropFilter(
-                
-                filter: ImageFilter.blur(sigmaX: 100.0, sigmaY: 100.0),
-                child: AlertDialog(
-                  backgroundColor: Colors.transparent,
-                  content: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      LottieBuilder.asset(
-                        'assets/animations/checked.json',
-                        controller: _controller,
-                        onLoaded: (composition) {
-                          _controller
-                            ..duration = composition.duration
-                            ..forward();
-                            _controller.addStatusListener((status){
-                              if(status==AnimationStatus.completed){
-                                Navigator.pop(context);
-                                // _controller.removeStatusListener((_){});
-                              }
-                            });
-                        },
-                        width: 300.0,
-                        height: 300.0,
-                        // repeat: false,
-                      ),
-                      Text(
-                        "Your massage has been sent succesfully !!!",
-                        style: TextStyle(
-                          color: ColorConst.kWhiteColor,
-                          fontSize: 24.0,
+          if (msgController.text.isNotEmpty) {
+            _controller.reset();
+            debugPrint("salom hammaga men buttonman");
+            showDialog<void>(
+              context: context,
+              builder: (BuildContext context) {
+                return BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 100.0, sigmaY: 100.0),
+                  child: AlertDialog(
+                    backgroundColor: Colors.transparent,
+                    content: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        LottieBuilder.asset(
+                          'assets/animations/checked.json',
+                          controller: _controller,
+                          onLoaded: (composition) {
+                            _controller
+                              ..duration = composition.duration
+                              ..forward();
+                          },
+                          width: 300.0,
+                          height: 300.0,
+                          // repeat: false,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
+                        Text(
+                          "Your massage has been sent succesfully !!!",
+                          style: TextStyle(
+                            color: ColorConst.kWhiteColor,
+                            fontSize: 24.0,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                    insetPadding: const EdgeInsets.symmetric(
+                      vertical: 50.0,
+                      horizontal: 50.0,
+                    ),
                   ),
-                  insetPadding: const EdgeInsets.symmetric(
-                    vertical: 50.0,
-                    horizontal: 50.0,
-                  ),
-                ),
-              );
-            },
-          );
-          msgController.clear();
-          
+                );
+              },
+            );
+            msgController.clear();
+          } else {
+            PopupMenuItem(
+              
+              child: Text("Please fill the text"),
+
+            );
+          }
         },
       );
 
