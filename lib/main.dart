@@ -14,11 +14,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       onGenerateRoute: route.onGenerateRoute,
       themeMode: ThemeMode.dark,
-      initialRoute: "/Contact",
+      initialRoute: "/splash",
       debugShowCheckedModeBanner: false,
-      title: 'MySelF',
+      title: 'MySelf',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
     );

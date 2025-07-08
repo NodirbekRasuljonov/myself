@@ -99,7 +99,7 @@ class _ContactSectionState extends State<ContactSection>
         key: _formKey,
         child: SizedBox.expand(
           child: TextFormField(
-            validator: (value) => value!.isEmpty?"Please it cannot be empty!!!":null,
+            validator: (value) => value!.isEmpty?"It cannot be empty!!!":null,
             maxLines: 100,
             cursorColor: ColorConst.kWhiteColor,
             style: TextStyle(color: ColorConst.kWhiteColor, fontSize: 18.0),
