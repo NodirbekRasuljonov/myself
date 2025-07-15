@@ -18,7 +18,9 @@ class ContactSection extends StatefulWidget {
 class _ContactSectionState extends State<ContactSection>
     with SingleTickerProviderStateMixin {
   TextEditingController msgController = TextEditingController();
-  final GlobalKey<FormState> _formKey=GlobalKey<FormState>();
+  TextEditingController mailController = TextEditingController();
+  final GlobalKey<FormState> _msgKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _mailKey = GlobalKey<FormState>();
   late final AnimationController _controller;
 
   @override
@@ -73,15 +75,9 @@ class _ContactSectionState extends State<ContactSection>
               icons: "assets/icons/instagram.png",
               url: UrlConst.instagram,
             ),
-            // socials(
-            //   icons: "assets/icons/twitter.png",
-            // ),
             inputs(context),
+            mail(context),
             send(context),
-            // Lottie.asset(
-            //   'assets/animations/checked.json',
-            //   height: 50.0,
-            // ),
           ],
         ),
       ),
@@ -96,40 +92,96 @@ class _ContactSectionState extends State<ContactSection>
       // color: Colors.amber,
 
       child: Form(
-        key: _formKey,
+        key: _msgKey,
         child: SizedBox.expand(
           child: TextFormField(
-            validator: (value) => value!.isEmpty?"It cannot be empty!!!":null,
-            maxLines: 100,
+            validator: (value) =>
+                value!.isEmpty ? "It cannot be empty!!!" : null,
+            maxLines: 5,
             cursorColor: ColorConst.kWhiteColor,
             style: TextStyle(color: ColorConst.kWhiteColor, fontSize: 18.0),
             controller: msgController,
             decoration: InputDecoration(
-              focusColor: ColorConst.kWhiteColor,
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0),
-                borderSide: BorderSide(
-                  color: ColorConst.kWhiteColor,
+                focusColor: ColorConst.kWhiteColor,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(
+                    color: ColorConst.kWhiteColor,
+                  ),
                 ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0),
-                borderSide: BorderSide(
-                  color: ColorConst.kWhiteColor,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(
+                    color: ColorConst.kWhiteColor,
+                  ),
                 ),
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0),
-                borderSide: BorderSide(
-                  color: ColorConst.kWhiteColor,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(
+                    color: ColorConst.kWhiteColor,
+                  ),
                 ),
-              ),
-            errorStyle: const TextStyle(
-              color: Colors.redAccent,
-              fontSize: 18,
-              
-            )
-            ),
+                errorStyle: const TextStyle(
+                  color: Colors.redAccent,
+                  fontSize: 18,
+                )),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Container mail(context) {
+    return Container(
+      height: 75.0,
+      width: 350.0,
+      alignment: Alignment.center,
+      // color: Colors.amber,
+
+      child: Form(
+        key: _mailKey,
+        child: SizedBox.expand(
+          child: TextFormField(
+            keyboardType: TextInputType.emailAddress,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "It cannot be empty!!!";
+              }
+              // Simple email regex
+              final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+              if (!emailRegex.hasMatch(value)) {
+                return "Please enter a valid email address";
+              }
+              return null;
+            },
+            maxLines: 1,
+            cursorColor: ColorConst.kWhiteColor,
+            style: TextStyle(color: ColorConst.kWhiteColor, fontSize: 18.0),
+            controller: mailController,
+            decoration: InputDecoration(
+                focusColor: ColorConst.kWhiteColor,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(
+                    color: ColorConst.kWhiteColor,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(
+                    color: ColorConst.kWhiteColor,
+                  ),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(
+                    color: ColorConst.kWhiteColor,
+                  ),
+                ),
+                errorStyle: const TextStyle(
+                  color: Colors.redAccent,
+                  fontSize: 15,
+                )),
           ),
         ),
       ),
@@ -171,11 +223,13 @@ class _ContactSectionState extends State<ContactSection>
     );
   }
 
-  void validateAndSave(){
-    final FormState? form=_formKey.currentState;
-    if(
-      form!.validate()
-    ){
+  void validateAndSave() {
+    final FormState? msgForm = _msgKey.currentState;
+    final FormState? mailForm = _mailKey.currentState;
+    if (msgForm != null &&
+        mailForm != null &&
+        msgForm.validate() &&
+        mailForm.validate()) {
       _controller.reset();
       debugPrint("salom hammaga men buttonman");
       showDialog<void>(
@@ -219,10 +273,8 @@ class _ContactSectionState extends State<ContactSection>
         },
       );
       msgController.clear();
-
-    }
-    else{
-    msgController.clear();
+      mailController.clear();
+    } else {
     }
   }
 
@@ -232,5 +284,3 @@ class _ContactSectionState extends State<ContactSection>
     super.dispose();
   }
 }
-
-
