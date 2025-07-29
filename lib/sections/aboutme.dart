@@ -8,62 +8,63 @@ class AboutMePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: ColorConst.darkColor,
-        iconTheme: IconThemeData(
-          color: ColorConst.kWhiteColor,
-        ),
-        title: Text(
-          TextConsts.abouttitle,
-          style: TextStyle(
-            color: ColorConst.kWhiteColor,
-            fontSize: 24.0,
-          ),
-        ),
-      ),
-      backgroundColor: ColorConst.darkColor,
-      body: Center(
-        child: Container(
-          // color: Colors.cyan.withOpacity(0.2),
-          // height: 500.0,
-          padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50.0),
-          alignment: Alignment.center,
-          child: /*Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const CircleAvatar(
-                backgroundImage: AssetImage(
-                  "assets/images/profile.jpg",
-                ),
-                radius: 85.0,
+      body: CustomScrollView(
+        
+        // shrinkWrap: true,
+        // physics: NeverScrollableScrollPhysics(),
+        slivers: [
+          SliverAppBar(
+            floating: true,
+            expandedHeight: 120.0,
+            pinned: true,
+
+            backgroundColor: ColorConst.darkColor,
+           flexibleSpace: Container(color: ColorConst.darkColor,),
+            title: Text(
+              TextConsts.abouttitle,
+              style: TextStyle(
+                color: ColorConst.kWhiteColor,
+                fontSize: 24.0,
               ),
-              Text(
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
                 TextConsts.about,
                 style: TextStyle(
-                  color: ColorConst.kWhiteColor,
-                  fontSize: 22.0,
+                  color: ColorConst.darkColor,
+                  fontSize: 18.0,
                 ),
-                textAlign: TextAlign.center,
-              ),*/
-              GridView.builder(
-            itemCount: TextConsts.skills.length,
-            itemBuilder: (context, index) {
-              return Text(
-                TextConsts.skills[index].toString(),
-                style: TextStyle(
-                  color: ColorConst.kWhiteColor,
-                  fontSize: 24.0,
-                  
-                ),
-                textAlign: TextAlign.center,
-              );
-            },
-            gridDelegate:
-                const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              ),
+            ),
           ),
-
-          //])
-        ),
+          SliverGrid(
+            
+            delegate: SliverChildBuilderDelegate(
+              
+              (context, index) {
+              
+                return Text(
+                    TextConsts.skills[index],
+                    style: TextStyle(
+                      color: ColorConst.darkColor,
+                      fontSize: 18.0,
+                      
+                    ),
+                    textAlign: TextAlign.center,
+                  );
+                
+                
+              },
+              
+              childCount: TextConsts.skills.length,
+            ),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,),
+          ),
+        ],
       ),
     );
   }
