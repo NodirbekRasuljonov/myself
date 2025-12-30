@@ -71,7 +71,9 @@ class _ContactSectionState extends State<ContactSection>
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 600),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                // use min main axis size and explicit gaps instead of spaceEvenly
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   socials(
@@ -88,7 +90,7 @@ class _ContactSectionState extends State<ContactSection>
                     icons: "assets/icons/instagram.png",
                     url: UrlConst.instagram,
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 20),
                   inputs(context),
                   const SizedBox(height: 12),
                   mail(context),
@@ -104,46 +106,47 @@ class _ContactSectionState extends State<ContactSection>
   }
 
   Container inputs(context) {
+    // fill available width (parent ConstrainedBox limits maxWidth)
     return Container(
-      height: 150.0,
-      width: 350.0,
+      width: double.infinity,
       alignment: Alignment.center,
-      // color: Colors.amber,
-
-      child: Form(
-        key: _msgKey,
-        child: SizedBox.expand(
+      child: SizedBox(
+        height: 150.0,
+        child: Form(
+          key: _msgKey,
           child: TextFormField(
             validator: (value) =>
                 value!.isEmpty ? "It cannot be empty!!!" : null,
+            minLines: 5,
             maxLines: 5,
             cursorColor: ColorConst.kWhiteColor,
             style: TextStyle(color: ColorConst.kWhiteColor, fontSize: 18.0),
             controller: msgController,
             decoration: InputDecoration(
-                focusColor: ColorConst.kWhiteColor,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  borderSide: BorderSide(
-                    color: ColorConst.kWhiteColor,
-                  ),
+              focusColor: ColorConst.kWhiteColor,
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: BorderSide(
+                  color: ColorConst.kWhiteColor,
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  borderSide: BorderSide(
-                    color: ColorConst.kWhiteColor,
-                  ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: BorderSide(
+                  color: ColorConst.kWhiteColor,
                 ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  borderSide: BorderSide(
-                    color: ColorConst.kWhiteColor,
-                  ),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: BorderSide(
+                  color: ColorConst.kWhiteColor,
                 ),
-                errorStyle: const TextStyle(
-                  color: Colors.redAccent,
-                  fontSize: 18,
-                )),
+              ),
+              errorStyle: const TextStyle(
+                color: Colors.redAccent,
+                fontSize: 18,
+              ),
+            ),
           ),
         ),
       ),
@@ -152,21 +155,18 @@ class _ContactSectionState extends State<ContactSection>
 
   Container mail(context) {
     return Container(
-      height: 75.0,
-      width: 350.0,
+      width: double.infinity,
       alignment: Alignment.center,
-      // color: Colors.amber,
-
-      child: Form(
-        key: _mailKey,
-        child: SizedBox.expand(
+      child: SizedBox(
+        height: 60.0,
+        child: Form(
+          key: _mailKey,
           child: TextFormField(
             keyboardType: TextInputType.emailAddress,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return "It cannot be empty!!!";
               }
-              // Simple email regex
               final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
               if (!emailRegex.hasMatch(value)) {
                 return "Please enter a valid email address";
@@ -178,54 +178,59 @@ class _ContactSectionState extends State<ContactSection>
             style: TextStyle(color: ColorConst.kWhiteColor, fontSize: 18.0),
             controller: mailController,
             decoration: InputDecoration(
-                focusColor: ColorConst.kWhiteColor,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  borderSide: BorderSide(
-                    color: ColorConst.kWhiteColor,
-                  ),
+              focusColor: ColorConst.kWhiteColor,
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: BorderSide(
+                  color: ColorConst.kWhiteColor,
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  borderSide: BorderSide(
-                    color: ColorConst.kWhiteColor,
-                  ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: BorderSide(
+                  color: ColorConst.kWhiteColor,
                 ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  borderSide: BorderSide(
-                    color: ColorConst.kWhiteColor,
-                  ),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: BorderSide(
+                  color: ColorConst.kWhiteColor,
                 ),
-                errorStyle: const TextStyle(
-                  color: Colors.redAccent,
-                  fontSize: 15,
-                )),
+              ),
+              errorStyle: const TextStyle(
+                color: Colors.redAccent,
+                fontSize: 15,
+              ),
+            ),
           ),
         ),
       ),
     );
   }
 
-  ElevatedButton send(context) => ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        fixedSize: const Size(350, 50),
-        backgroundColor: ColorConst.darkColor,
-        disabledBackgroundColor: ColorConst.darkColor,
-        surfaceTintColor: ColorConst.darkColor,
-        foregroundColor: ColorConst.kWhiteColor,
-        side: BorderSide(color: ColorConst.kWhiteColor),
-      ),
-      child: Text(
-        TextConsts.send,
-        style: TextStyle(
-          fontSize: 24.0,
-          color: ColorConst.kWhiteColor,
+  Widget send(context) => SizedBox(
+        width: double.infinity,
+        height: 50,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: ColorConst.darkColor,
+            disabledBackgroundColor: ColorConst.darkColor,
+            surfaceTintColor: ColorConst.darkColor,
+            foregroundColor: ColorConst.kWhiteColor,
+            side: BorderSide(color: ColorConst.kWhiteColor),
+          ),
+          child: Text(
+            TextConsts.send,
+            style: TextStyle(
+              fontSize: 24.0,
+              color: ColorConst.kWhiteColor,
+            ),
+          ),
+          onPressed: () async {
+            validateAndSave();
+          },
         ),
-      ),
-      onPressed: () async {
-        validateAndSave();
-      });
+      );
 
   GestureDetector socials({required String icons, required Uri url}) {
     return GestureDetector(
@@ -259,25 +264,27 @@ class _ContactSectionState extends State<ContactSection>
             child: AlertDialog(
               backgroundColor: Colors.transparent,
               content: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  LottieBuilder.asset(
-                    'assets/animations/checked.json',
-                    controller: _controller,
-                    onLoaded: (composition) {
-                      _controller
-                        ..duration = composition.duration
-                        ..forward();
-                    },
-                    width: 300.0,
-                    height: 300.0,
-                    // repeat: false,
+                  SizedBox(
+                    width: 180,
+                    height: 180,
+                    child: LottieBuilder.asset(
+                      'assets/animations/checked.json',
+                      controller: _controller,
+                      onLoaded: (composition) {
+                        _controller
+                          ..duration = composition.duration
+                          ..forward();
+                      },
+                    ),
                   ),
+                  const SizedBox(height: 12),
                   Text(
-                    "Your massage has been sent succesfully !!!",
+                    "Your message has been sent successfully!",
                     style: TextStyle(
                       color: ColorConst.kWhiteColor,
-                      fontSize: 24.0,
+                      fontSize: 18.0,
                     ),
                     textAlign: TextAlign.center,
                   ),
