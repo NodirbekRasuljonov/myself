@@ -73,7 +73,7 @@ class _ContactSectionState extends State<ContactSection>
               child: Column(
                 // use min main axis size and explicit gaps instead of spaceEvenly
                 mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   socials(
