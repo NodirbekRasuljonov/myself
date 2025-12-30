@@ -50,7 +50,7 @@ class AppRoute {
       case "/Projects":
         return MaterialPageRoute(
           builder: (context) {
-            return Projects();
+            return const Projects();
           },
         );
     }

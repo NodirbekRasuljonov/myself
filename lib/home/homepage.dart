@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   double blurvalue = 0.0;
-  GlobalKey _globalKey = GlobalKey<ScaffoldState>();
+  final GlobalKey _globalKey = GlobalKey<ScaffoldState>();
   bool isOpen = false;
   @override
   Widget build(BuildContext context) {

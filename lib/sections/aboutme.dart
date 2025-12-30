@@ -61,7 +61,7 @@ class AboutMePage extends StatelessWidget {
               
               childCount: TextConsts.skills.length,
             ),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,),
           ),
         ],

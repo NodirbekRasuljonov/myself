@@ -9,7 +9,7 @@ import 'package:lottie/lottie.dart';
 
 // ignore: must_be_immutable
 class ContactSection extends StatefulWidget {
-  ContactSection({super.key});
+  const ContactSection({super.key});
 
   @override
   State<ContactSection> createState() => _ContactSectionState();
@@ -43,6 +43,7 @@ class _ContactSectionState extends State<ContactSection>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: ColorConst.darkColor,
       appBar: AppBar(
         iconTheme: IconThemeData(
@@ -57,28 +58,46 @@ class _ContactSectionState extends State<ContactSection>
         ),
         backgroundColor: ColorConst.darkColor,
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        alignment: Alignment.center,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            socials(
-              icons: "assets/icons/github.png",
-              url: UrlConst.github,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          padding: EdgeInsets.only(
+            left: 16.0,
+            right: 16.0,
+            top: 16.0,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 16.0,
+          ),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 600),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  socials(
+                    icons: "assets/icons/github.png",
+                    url: UrlConst.github,
+                  ),
+                  const SizedBox(height: 12),
+                  socials(
+                    icons: "assets/icons/telegram.png",
+                    url: UrlConst.telegram,
+                  ),
+                  const SizedBox(height: 12),
+                  socials(
+                    icons: "assets/icons/instagram.png",
+                    url: UrlConst.instagram,
+                  ),
+                  const SizedBox(height: 16),
+                  inputs(context),
+                  const SizedBox(height: 12),
+                  mail(context),
+                  const SizedBox(height: 12),
+                  send(context),
+                ],
+              ),
             ),
-            socials(
-              icons: "assets/icons/telegram.png",
-              url: UrlConst.telegram,
-            ),
-            socials(
-              icons: "assets/icons/instagram.png",
-              url: UrlConst.instagram,
-            ),
-            inputs(context),
-            mail(context),
-            send(context),
-          ],
+          ),
         ),
       ),
     );
@@ -274,8 +293,7 @@ class _ContactSectionState extends State<ContactSection>
       );
       msgController.clear();
       mailController.clear();
-    } else {
-    }
+    } else {}
   }
 
   @override
