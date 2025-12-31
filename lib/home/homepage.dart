@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:myself/const/color_const.dart';
 import 'package:myself/const/text_const.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:flutter/services.dart';
+import 'dart:io';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,28 +19,36 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _globalKey,
-      backgroundColor: ColorConst.darkColor,
-      drawer: drawer(context),
-      onDrawerChanged: (v) {
-        setState(() {
-          isOpen = v;
-        });
-      },
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: ColorConst.kWhiteColor),
+        key: _globalKey,
         backgroundColor: ColorConst.darkColor,
-        centerTitle: true,
-        title: Text(
-          "Home Page",
-          style: TextStyle(
-            color: ColorConst.kWhiteColor,
-            fontSize: 24.0,
-            decoration: TextDecoration.none,
+        drawer: drawer(context),
+        onDrawerChanged: (v) {
+          setState(() {
+            isOpen = v;
+          });
+        },
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: ColorConst.kWhiteColor),
+          backgroundColor: ColorConst.darkColor,
+          centerTitle: true,
+          title: Text(
+            "Home Page",
+            style: TextStyle(
+              color: ColorConst.kWhiteColor,
+              fontSize: 24.0,
+              decoration: TextDecoration.none,
+            ),
           ),
         ),
-      ),
-    );
+        
+        body: ElevatedButton(
+          onPressed: (){
+            saveCV();
+          },
+          child: Text(
+            "Download CV",
+          ),
+        ));
   }
 
   Container drawer(BuildContext context) {
@@ -70,4 +81,17 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+}
+
+Future<void> saveCV() async {
+  //loading file from assets
+  final byteData = await rootBundle.load("assets/cv/cv.pdf");
+  //getting device directory to save file
+  final directory = await getApplicationDocumentsDirectory();
+  //createung file
+  final file = File(directory.path + "/cv.pdf");
+  await file.writeAsBytes(
+    byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes),
+  );
+  debugPrint("File saved to ${file.path}");
 }
